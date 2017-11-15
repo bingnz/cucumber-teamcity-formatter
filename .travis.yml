@@ -20,7 +20,10 @@ env:
 before_script:
   - npm prune
 
-script: "gulp coverage"
+script: "gulp build"
+
+after_script:
+  - "gulp coverage"
 
 after_success:
   - npm install -g codeclimate-test-reporter
