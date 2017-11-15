@@ -20,18 +20,30 @@ export default class TeamCityFormatter extends Formatter {
         return { totalCases, caseIndex };
     }
 
-    logTestCaseStarted({ sourceLocation }) {
-        const { gherkinDocument, pickle } = this.eventDataCollector.getTestCaseData(sourceLocation);
-
+    logTestSuiteStartedIfFirstTestCase({ sourceLocation, gherkinDocument }) {
         const { caseIndex } = this.getCaseIndexInfo({ sourceLocation, gherkinDocument });
 
         if (caseIndex === 0) {
             this.log(`##teamcity[testSuiteStarted name='${this.escape(gherkinDocument.feature.name)}']\n`);
         }
+    }
+
+    logTestCaseStarted({ sourceLocation }) {
+        const { gherkinDocument, pickle: { name: pickleName } } = this.eventDataCollector.getTestCaseData(sourceLocation);
+
+        this.logTestSuiteStartedIfFirstTestCase({ sourceLocation, gherkinDocument });
 
         this.log(
-            `##teamcity[testStarted name='${this.escape(pickle.name)}' captureStandardOutput='true']\n`
+            `##teamcity[testStarted name='${this.escape(pickleName)}' captureStandardOutput='true']\n`
         );
+    }
+
+    logTestSuiteFinishedIfLastTestCase({ sourceLocation, gherkinDocument }) {
+        const { totalCases, caseIndex } = this.getCaseIndexInfo({ sourceLocation, gherkinDocument });
+
+        if (caseIndex === totalCases - 1) {
+            this.log(`##teamcity[testSuiteFinished name='${this.escape(gherkinDocument.feature.name)}']\n`);
+        }
     }
 
     logTestCaseFinished({ sourceLocation }) {
@@ -61,11 +73,7 @@ export default class TeamCityFormatter extends Formatter {
 
         this.log(`##teamcity[testFinished name='${this.escape(pickle.name)}' duration='${duration}']\n`);
 
-        const { totalCases, caseIndex } = this.getCaseIndexInfo({ sourceLocation, gherkinDocument });
-
-        if (caseIndex === totalCases - 1) {
-            this.log(`##teamcity[testSuiteFinished name='${this.escape(gherkinDocument.feature.name)}']\n`);
-        }
+        this.logTestSuiteFinishedIfLastTestCase({ sourceLocation, gherkinDocument });
     }
 
     escape(text) {
