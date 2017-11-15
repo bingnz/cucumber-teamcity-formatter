@@ -1,6 +1,6 @@
 {
   "name": "cucumber-teamcity-formatter",
-  "version": "0.0.1",
+  "version": "0.0.0-development",
   "description": "Formatter for cucumber-js to write test output to the console in a format parsable by TeamCity.",
   "main": "dist/cucumber-teamcity-formatter.js",
   "scripts": {
@@ -8,7 +8,8 @@
     "lint": "gulp lint",
     "watch": "gulp watch",
     "build": "gulp build",
-    "coverage": "gulp coverage"
+    "coverage": "gulp coverage",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",
@@ -51,7 +52,7 @@
     "json-loader": "0.5.4",
     "memory-streams": "^0.1.2",
     "mocha": "3.0.2",
-    "semantic-release": "^8.2.3",
+    "semantic-release": "^8.2.0",
     "sinon": "1.17.5",
     "sinon-chai": "2.8.0",
     "uglifyjs-webpack-plugin": "^1.0.1",
