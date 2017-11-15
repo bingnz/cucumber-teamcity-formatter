@@ -15,6 +15,9 @@
     "type": "git",
     "url": "https://github.com/bingnz/cucumber-teamcity-formatter.git"
   },
+  "files": [
+    "dist"
+  ],
   "keywords": [],
   "author": "David Chandler",
   "license": "MIT",
