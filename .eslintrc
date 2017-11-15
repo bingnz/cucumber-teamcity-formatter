@@ -1,0 +1,18 @@
+{
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "extends": "eslint:recommended",
+  "rules": {
+    "quotes": ["warn", "single"],
+    "indent": ["warn", 4]
+  },
+  "env": {
+    "node": true
+  },
+  "plugins": [
+    "babel"
+  ]
+}

@@ -1,0 +1,12 @@
+*.map
+coverage
+src
+test
+.vscode
+.travis.yml
+.babelrc
+.editorconfig
+.eslintrc
+gulpfile.js
+wallaby.conf.js
+

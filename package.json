@@ -1,0 +1,64 @@
+{
+  "name": "cucumber-teamcity-formatter",
+  "version": "0.0.1",
+  "description": "Formatter for cucumber-js to write test output to the console in a format parsable by TeamCity.",
+  "main": "dist/cucumber-teamcity-formatter.js",
+  "scripts": {
+    "test": "gulp",
+    "lint": "gulp lint",
+    "watch": "gulp watch",
+    "build": "gulp build",
+    "coverage": "gulp coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bingnz/cucumber-teamcity-formatter.git"
+  },
+  "keywords": [],
+  "author": "David Chandler",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bingnz/cucumber-teamcity-formatter/issues"
+  },
+  "homepage": "https://github.com/bingnz/cucumber-teamcity-formatter#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.2",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-function-bind": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-latest": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "chai": "3.5.0",
+    "cucumber": "^3.0.0",
+    "del": "2.2.2",
+    "eslint-plugin-babel": "^4.1.2",
+    "events": "^1.1.1",
+    "gherkin": "^5.0.1",
+    "gulp": "3.9.1",
+    "gulp-eslint": "3.0.1",
+    "gulp-filter": "4.0.0",
+    "gulp-istanbul": "1.1.1",
+    "gulp-load-plugins": "1.2.4",
+    "gulp-mocha": "3.0.1",
+    "gulp-plumber": "1.1.0",
+    "gulp-rename": "1.2.2",
+    "gulp-sourcemaps": "1.6.0",
+    "gulp-uglify": "^3.0.0",
+    "isparta": "4.0.0",
+    "json-loader": "0.5.4",
+    "memory-streams": "^0.1.2",
+    "mocha": "3.0.2",
+    "semantic-release": "^8.2.3",
+    "sinon": "1.17.5",
+    "sinon-chai": "2.8.0",
+    "uglifyjs-webpack-plugin": "^1.0.1",
+    "webpack-node-externals": "^1.6.0",
+    "webpack-stream": "^4.0.0"
+  },
+  "peerDependencies": {
+    "cucumberjs": ">= 3.0.0"
+  }
+}
