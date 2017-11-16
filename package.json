@@ -60,6 +60,6 @@
     "webpack-stream": "^4.0.0"
   },
   "peerDependencies": {
-    "cucumberjs": ">= 3.0.0"
+    "cucumber": ">= 3.0.0"
   }
 }
