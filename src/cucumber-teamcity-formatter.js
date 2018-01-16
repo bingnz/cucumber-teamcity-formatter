@@ -54,21 +54,29 @@ export default class TeamCityFormatter extends Formatter {
             testCase: { result: { status, duration } }
         } = this.eventDataCollector.getTestCaseData(sourceLocation);
 
-        if (status === Status.AMBIGUOUS || status === Status.FAILED) {
-            const details = formatterHelpers.formatIssue({
-                colorFns: this.colorFns,
-                gherkinDocument,
-                number: 1,
-                pickle,
-                snippetBuilder: this.snippetBuilder,
-                testCase
-            });
+        switch (status) {
+            case Status.AMBIGUOUS:
+            case Status.FAILED: {
+                const details = formatterHelpers.formatIssue({
+                    colorFns: this.colorFns,
+                    gherkinDocument,
+                    number: 1,
+                    pickle,
+                    snippetBuilder: this.snippetBuilder,
+                    testCase
+                });
 
-            this.log(
-                `##teamcity[testFailed name='${this.escape(pickle.name)}' message='${this.escape(
-                    `${pickle.name} FAILED`
-                )}' details='${this.escape(details)}']\n`
-            );
+                this.log(
+                    `##teamcity[testFailed name='${this.escape(pickle.name)}' message='${this.escape(
+                        `${pickle.name} FAILED`
+                    )}' details='${this.escape(details)}']\n`
+                );
+                break;
+            }
+
+            case Status.SKIPPED:
+                this.log(`##teamcity[testIgnored name='${this.escape(pickle.name)}']\n`);
+                break;
         }
 
         this.log(`##teamcity[testFinished name='${this.escape(pickle.name)}' duration='${duration}']\n`);
