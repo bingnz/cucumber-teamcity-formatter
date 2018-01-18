@@ -21,5 +21,5 @@ Use the `--format` command line option for cucumber js as described [here](https
 
 For example:
 ```
-$ node-modules/.bin/cucumber --format node-modules/cucumber-teamcity-formatter
+$ node_modules/.bin/cucumber --format node_modules/cucumber-teamcity-formatter
 ```
