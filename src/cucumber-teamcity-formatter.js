@@ -54,26 +54,42 @@ export default class TeamCityFormatter extends Formatter {
             testCase: { result: { status, duration } }
         } = this.eventDataCollector.getTestCaseData(sourceLocation);
 
-        if (status === Status.AMBIGUOUS || status === Status.FAILED) {
-            const details = formatterHelpers.formatIssue({
-                colorFns: this.colorFns,
-                gherkinDocument,
-                number: 1,
-                pickle,
-                snippetBuilder: this.snippetBuilder,
-                testCase
-            });
+        switch (status) {
+            case Status.AMBIGUOUS:
+            case Status.FAILED: {
+                this.logTestFailed(gherkinDocument, pickle, testCase)
+                break;
+            }
 
-            this.log(
-                `##teamcity[testFailed name='${this.escape(pickle.name)}' message='${this.escape(
-                    `${pickle.name} FAILED`
-                )}' details='${this.escape(details)}']\n`
-            );
+            case Status.SKIPPED:
+                this.logTestSkipped(pickle)
+                break;
         }
 
-        this.log(`##teamcity[testFinished name='${this.escape(pickle.name)}' duration='${duration}']\n`);
+        this.logTestFinished(pickle, duration);
 
         this.logTestSuiteFinishedIfLastTestCase({ sourceLocation, gherkinDocument });
+    }
+
+    logTestFailed(gherkinDocument, pickle, testCase) {
+        const details = formatterHelpers.formatIssue({
+            colorFns: this.colorFns,
+            gherkinDocument,
+            number: 1,
+            pickle,
+            snippetBuilder: this.snippetBuilder,
+            testCase
+        });
+
+        this.log(`##teamcity[testFailed name='${this.escape(pickle.name)}' message='${this.escape(`${pickle.name} FAILED`)}' details='${this.escape(details)}']\n`);
+    }
+
+    logTestSkipped(pickle) {
+        this.log(`##teamcity[testIgnored name='${this.escape(pickle.name)}']\n`);
+    }
+
+    logTestFinished(pickle, duration) {
+        this.log(`##teamcity[testFinished name='${this.escape(pickle.name)}' duration='${duration}']\n`);
     }
 
     escape(text) {

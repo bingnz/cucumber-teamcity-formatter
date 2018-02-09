@@ -250,6 +250,84 @@ describe('TeamCityFormatter', function() {
             });
         });
 
+        describe('skipped', function() {
+            beforeEach(function() {
+                this.eventBroadcaster.emit('test-case-prepared', {
+                    sourceLocation: this.testCase1.sourceLocation,
+                    steps: [
+                        {
+                            sourceLocation: { uri: 'a.feature', line: 6 }
+                        },
+                        {
+                            sourceLocation: { uri: 'a.feature', line: 7 }
+                        }
+                    ]
+                });
+                this.eventBroadcaster.emit('test-case-started', {
+                    sourceLocation: this.testCase1.sourceLocation
+                });
+                this.eventBroadcaster.emit('test-step-finished', {
+                    index: 0,
+                    testCase: this.testCase1,
+                    result: { duration: 1, status: Status.SKIPPED }
+                });
+                this.eventBroadcaster.emit('test-step-finished', {
+                    index: 1,
+                    testCase: this.testCase1,
+                    result: { duration: 2, status: Status.SKIPPED }
+                });
+                this.eventBroadcaster.emit('test-case-finished', {
+                    sourceLocation: this.testCase1.sourceLocation,
+                    result: { duration: 3, status: Status.SKIPPED }
+                });
+
+                this.eventBroadcaster.emit('test-case-prepared', {
+                    sourceLocation: this.testCase2.sourceLocation,
+                    steps: [
+                        {
+                            sourceLocation: { uri: 'a.feature', line: 10 }
+                        },
+                        {
+                            sourceLocation: { uri: 'a.feature', line: 11 }
+                        }
+                    ]
+                });
+                this.eventBroadcaster.emit('test-case-started', {
+                    sourceLocation: this.testCase2.sourceLocation
+                });
+                this.eventBroadcaster.emit('test-step-finished', {
+                    index: 0,
+                    testCase: this.testCase2,
+                    result: { duration: 4, status: Status.SKIPPED }
+                });
+                this.eventBroadcaster.emit('test-step-finished', {
+                    index: 1,
+                    testCase: this.testCase2,
+                    result: { duration: 5, status: Status.SKIPPED }
+                });
+                this.eventBroadcaster.emit('test-case-finished', {
+                    sourceLocation: this.testCase2.sourceLocation,
+                    result: { duration: 9, status: Status.SKIPPED }
+                });
+
+                this.eventBroadcaster.emit('test-run-finished');
+            });
+
+            it('outputs the TeamCity markers for the feature and scenario', function() {
+                const outputLines = this.output.trim().split(/\r?\n/);
+                expect(outputLines.length).to.eql(8);
+                expect(outputLines[0]).to.eql('##teamcity[testSuiteStarted name=\'my feature\']');
+                expect(outputLines[1]).to.eql('##teamcity[testStarted name=\'my first scenario\' captureStandardOutput=\'true\']');
+                expect(outputLines[2]).to.eql('##teamcity[testIgnored name=\'my first scenario\']');
+                expect(outputLines[3]).to.eql('##teamcity[testFinished name=\'my first scenario\' duration=\'3\']');
+
+                expect(outputLines[4]).to.eql('##teamcity[testStarted name=\'my second scenario\' captureStandardOutput=\'true\']');
+                expect(outputLines[5]).to.eql('##teamcity[testIgnored name=\'my second scenario\']');
+                expect(outputLines[6]).to.eql('##teamcity[testFinished name=\'my second scenario\' duration=\'9\']');
+                expect(outputLines[7]).to.eql('##teamcity[testSuiteFinished name=\'my feature\']');
+            });
+        });
+
         ['failed', 'ambiguous'].map(function(status) {
             describe(`test has ${status} status`, function() {
                 beforeEach(function() {
