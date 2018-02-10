@@ -28,3 +28,4 @@ dist
 
 # Users Environment Variables
 .lock-wscript
+/.nyc_output
