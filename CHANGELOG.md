@@ -1,10 +1,8 @@
-### [1.1.1]
-(https://github.com/bingnz/cucumber-teamcity-formatter/releases/tag/v1.1.1)
+### [1.1.1](https://github.com/bingnz/cucumber-teamcity-formatter/releases/tag/v1.1.1)
 
 - Updated packages and improved build process.
 
-### [1.1.0]
-(https://github.com/bingnz/cucumber-teamcity-formatter/releases/tag/v1.1.0)
+### [1.1.0](https://github.com/bingnz/cucumber-teamcity-formatter/releases/tag/v1.1.0)
 
 - Show skipped tests as ignored in TeamCity.
 
