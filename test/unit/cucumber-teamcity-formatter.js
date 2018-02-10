@@ -155,7 +155,7 @@ describe('TeamCityFormatter', function() {
                     'my second scenario description\n' +
                     'Given my first step for my second scenario\n' +
                     'Given my second step for my second scenario',
-                    'a.feature'
+                'a.feature'
             );
 
             events.forEach(event => {
