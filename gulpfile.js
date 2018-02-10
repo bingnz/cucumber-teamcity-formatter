@@ -2,15 +2,11 @@ const gulp = require('gulp');
 const loadPlugins = require('gulp-load-plugins');
 const del = require('del');
 const path = require('path');
-const isparta = require('isparta');
 const webpackStream = require('webpack-stream');
 
-const Instrumenter = isparta.Instrumenter;
-const mochaGlobals = require('./test/setup/.globals');
 const manifest = require('./package.json');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
-const babel = require('babel-core/register');
 
 // Load all of our Gulp plugins
 const $ = loadPlugins();
@@ -72,45 +68,6 @@ function build() {
         .pipe(gulp.dest(destinationFolder));
 }
 
-function _mocha() {
-    return gulp.src(['test/setup/node.js', 'test/unit/**/*.js'], { read: false }).pipe(
-        $.mocha({
-            compilers: {
-                js: babel
-            },
-            reporter: 'dot',
-            globals: Object.keys(mochaGlobals.globals),
-            ignoreLeaks: false
-        })
-    );
-}
-
-function _registerBabel() {
-    require('babel-register');
-}
-
-function test() {
-    return _mocha();
-}
-
-function coverage(done) {
-    _registerBabel();
-    gulp
-        .src(['src/**/*.js'])
-        .pipe(
-            $.istanbul({
-                instrumenter: Instrumenter,
-                includeUntested: true
-            })
-        )
-        .pipe($.istanbul.hookRequire())
-        .on('finish', () => {
-            return test()
-                .pipe($.istanbul.writeReports())
-                .on('end', done);
-        });
-}
-
 const watchFiles = ['src/**/*', 'test/**/*', 'package.json', '**/.eslintrc'];
 
 // Run the headless unit tests as you make changes.
@@ -139,14 +96,7 @@ gulp.task('lint', ['lint-src', 'lint-test', 'lint-gulpfile']);
 // Build two versions of the library
 gulp.task('build', ['lint', 'clean'], build);
 
-// Lint and run our tests
-gulp.task('test', ['lint'], test);
-
-// Set up coverage and run tests
-gulp.task('coverage', ['lint'], coverage);
-
 // Run the headless unit tests as you make changes.
 gulp.task('watch', watch);
 
-// An alias of test
-gulp.task('default', ['test']);
+gulp.task('default', ['build']);
