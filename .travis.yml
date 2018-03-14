@@ -15,18 +15,20 @@ node_js:
 sudo: false
 
 env:
-  CODECLIMATE_REPO_TOKEN: e22c15a3c0c76152f3123cc37c9b4084402d85b365b293a0dbe92cf211b60228
+  CC_TEST_REPORTER_ID: e22c15a3c0c76152f3123cc37c9b4084402d85b365b293a0dbe92cf211b60228
 
 before_script:
   - npm prune
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 
 script:
   - npm run build
   - npm run coverage
 
 after_success:
-  - npm install -g codeclimate-test-reporter
-  - codeclimate-test-reporter < coverage/lcov.info
+  - ./cc-test-reporter after-build -p coverage
   - npm run semantic-release
 
 branches:

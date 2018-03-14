@@ -1,0 +1,20 @@
+{
+  "check-coverage": true,
+  "extension": [
+    ".js"
+  ],
+  "include": [
+    "src/**/*.js"
+  ],
+  "require": [
+    "babel-core/register",
+    "babel-polyfill"
+  ],
+  "reporter": [
+    "json",
+    "lcov",
+    "html",
+    "text-summary"
+  ],
+  "report-dir": "coverage"
+}
