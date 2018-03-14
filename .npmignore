@@ -7,6 +7,7 @@ test
 .babelrc
 .editorconfig
 .eslintrc
-gulpfile.js
+.nycrc
+gulpfile.babel.js
 wallaby.conf.js
 
