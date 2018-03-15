@@ -28,7 +28,10 @@ script:
   - npm run coverage
 
 after_success:
-  - ./cc-test-reporter after-build -p coverage
+  - npm install relcov -g
+  - relcov < ./coverage/lcov.info > ./coverage/lcov-remapped.info
+  - mv ./coverage/lcov-remapped.info ./coverage/lcov.info
+  - ./cc-test-reporter after-build -p coverage --debug
   - npm run semantic-release
 
 branches:
