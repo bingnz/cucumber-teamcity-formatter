@@ -2,7 +2,7 @@ language: node_js
 
 cache:
   directories:
-    - ~/.npm
+    - "~/.npm"
 
 notifications:
   email: false
@@ -16,24 +16,32 @@ sudo: false
 
 env:
   CC_TEST_REPORTER_ID: e22c15a3c0c76152f3123cc37c9b4084402d85b365b293a0dbe92cf211b60228
+  global:
+    secure: arNTF9Mjo6UjZj2AF7H8w/7lM7zJIBxNZJQhW7lp2eCtV5f9Z6r1dqk98ALojN3Hmu/AJjq1StplzbKyvUyyNMbg3GBPwcQ0PJiwHRaIM2HAAS5zl34oSDq2jGMYm5IzCkv/ctzDNX8SVE+OYpVvP6tmISKiA48+38m73qUeW34PzvAS3UhcQLDXcDQ1NpECp986HCq0zEUoWa8iSmTWSKVQe+cG7qHPRfBO0qULzENmTmL6M57qbd5SOFphzI19wT7pLuD2WytAeit1sE58FozIY4i3FvpILWDjukNmz5zIdaruXYZJtOxGX+hKPsNUNv4RiRKRTayQJpfOdSCWBKxSqVBpq+6jRRu7lNhOB3RdwyTnf1lcg5BwfveCo6EzkWgPY/OqNfFOnAFbAiXRqBiCfA0wGLxM989Li/Sp5O7xV8K5UKKGV7hSJIAU2jpnzJMBXzJjORZUmRTqHs7OVDpq/2FkpCzpv6jKAYdXWpCj1g008RMWkLJ5VvMWZONmUyM2DDwA8coXiMPZs0KBhU75QPHIPFyUi0wGJPYdJnnkF7QOwwwcrm9zCuxfQSmXH4PSwVPI+DCzq3GqB4YPNaIjc7HZbXf5JUH6XvTN6/9JyT7F0zUA/xJiBX0oCfVqnZnPdwWmqMnHVS7tKGQmLhvx+eSMTCs6kYUI3/wPi7s=
+
+before_install:
+  - npm install -g greenkeeper-lockfile
 
 before_script:
-  - npm prune
+  - greenkeeper-lockfile-update
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
+  - "./cc-test-reporter before-build"
 
 script:
   - npm run build
   - npm run coverage
 
+after_script:
+  - greenkeeper-lockfile-upload
+
 after_success:
   - npm install relcov -g
   - relcov < ./coverage/lcov.info > ./coverage/lcov-remapped.info
   - mv ./coverage/lcov-remapped.info ./coverage/lcov.info
-  - ./cc-test-reporter after-build -p coverage --debug
+  - "./cc-test-reporter after-build -p coverage --debug"
   - npm run semantic-release
 
 branches:
   except:
-    - /^v\d+\.\d+\.\d+$/
+  - "/^v\\d+\\.\\d+\\.\\d+$/"
