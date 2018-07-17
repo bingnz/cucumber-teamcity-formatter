@@ -4,7 +4,7 @@ module.exports = function(root, testSuite) {
     testSuite = testSuite || root;
 
     testSuite.beforeEach(() => {
-        root.sandbox = root.sinon.sandbox.create();
+        root.sandbox = root.sinon.createSandbox();
         root.stub = root.sandbox.stub.bind(root.sandbox);
         root.spy = root.sandbox.spy.bind(root.sandbox);
         root.mock = root.sandbox.mock.bind(root.sandbox);
