@@ -56,7 +56,7 @@ function compile() {
                 },
                 externals: [nodeExternals()],
                 module: {
-                    loaders: [{ test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }]
+                    rules: [{ test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }]
                 },
                 plugins: [new UglifyJSPlugin({ sourceMap: true })],
                 devtool: 'source-map'
