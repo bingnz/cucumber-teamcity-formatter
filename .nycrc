@@ -7,8 +7,7 @@
     "src/**/*.js"
   ],
   "require": [
-    "babel-core/register",
-    "babel-polyfill"
+    "@babel/register"
   ],
   "reporter": [
     "json",
