@@ -48,6 +48,7 @@ function compile() {
         .pipe(
             webpackStream({
                 target: 'node',
+                mode: 'production',
                 output: {
                     filename: `${exportFileName}.js`,
                     libraryTarget: 'umd',
@@ -68,7 +69,7 @@ function compile() {
 function mocha() {
     return gulp.src(['test/setup/node.js', 'test/unit/**/*.js'], { read: false }).pipe(
         $.mocha({
-            require: 'babel-core/register',
+            require: '@babel/register',
             reporter: 'dot',
             globals: Object.keys(mochaGlobals.globals),
             ignoreLeaks: false
