@@ -5,7 +5,7 @@ import path from 'path';
 import webpackStream from 'webpack-stream';
 
 import manifest from './package.json';
-import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
+import TerserPlugin from 'terser-webpack-plugin';
 import nodeExternals from 'webpack-node-externals';
 import mochaGlobals from './test/setup/.globals';
 
@@ -59,7 +59,7 @@ function compile() {
                 module: {
                     rules: [{ test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }]
                 },
-                plugins: [new UglifyJSPlugin({ sourceMap: true })],
+                plugins: [new TerserPlugin({ sourceMap: true })],
                 devtool: 'source-map'
             })
         )
