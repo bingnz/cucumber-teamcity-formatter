@@ -23,11 +23,11 @@
   },
   "homepage": "https://github.com/bingnz/cucumber-teamcity-formatter#readme",
   "devDependencies": {
-    "@babel/core": "^7.0.0",
+    "@babel/core": "^7.1.5",
     "@babel/plugin-proposal-function-bind": "^7.0.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/polyfill": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-env": "^7.1.5",
     "@babel/register": "^7.0.0",
     "babel-eslint": "^10.0.0",
     "babel-loader": "^8.0.0",
