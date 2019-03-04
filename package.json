@@ -33,7 +33,7 @@
     "babel-loader": "^8.0.0",
     "chai": "^4.1.2",
     "cucumber": "^5.0.0",
-    "del": "^3.0.0",
+    "del": "^4.0.0",
     "eslint-plugin-babel": "^5.1.0",
     "events": "^3.0.0",
     "gherkin": "^5.1.0",
