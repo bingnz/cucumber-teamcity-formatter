@@ -40,7 +40,7 @@
     "gulp-cli": "^2.2.0",
     "gulp-eslint": "^6.0.0",
     "gulp-filter": "^6.0.0",
-    "gulp-load-plugins": "^1.6.0",
+    "gulp-load-plugins": "^2.0.0",
     "gulp-mocha": "^6.0.0",
     "gulp-plumber": "^1.2.1",
     "gulp-rename": "^1.4.0",
