@@ -41,7 +41,7 @@
     "gulp-eslint": "^6.0.0",
     "gulp-filter": "^6.0.0",
     "gulp-load-plugins": "^2.0.0",
-    "gulp-mocha": "^6.0.0",
+    "gulp-mocha": "^7.0.0",
     "gulp-plumber": "^1.2.1",
     "gulp-rename": "^1.4.0",
     "gulp-sourcemaps": "^2.6.5",
