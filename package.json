@@ -28,6 +28,7 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
     "@babel/preset-env": "^7.6.3",
     "@babel/register": "^7.6.2",
+    "@semantic-release/changelog": "^3.0.4",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "chai": "^4.2.0",
@@ -59,5 +60,14 @@
   },
   "peerDependencies": {
     "cucumber": ">= 6.0.2 < 7"
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/github"
+    ]
   }
 }
