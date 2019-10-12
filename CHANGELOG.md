@@ -1,4 +1,4 @@
-### [2.0.1](https://github.com/bingnz/cucumber-teamcity-formatter/releases/tag/v1.1.1)
+### [2.0.1](https://github.com/bingnz/cucumber-teamcity-formatter/releases/tag/v2.0.1)
 
 - Now supports cucumber 6.0.2+.
 - Removed unnecessary files from package.
