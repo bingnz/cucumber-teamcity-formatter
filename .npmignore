@@ -10,4 +10,5 @@ test
 .nycrc
 gulpfile.babel.js
 wallaby.conf.js
-
+cc-test-reporter
+.nyc_output
