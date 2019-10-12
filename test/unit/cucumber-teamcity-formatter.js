@@ -59,7 +59,7 @@ describe('TeamCityFormatter', function() {
                     });
                 }
             });
-            this.testCase = { sourceLocation: { uri: 'a.feature', line: 4 } };
+            this.testCase = { attemptNumber: 1, sourceLocation: { uri: 'a.feature', line: 4 } };
         });
 
         describe('passed', function() {
@@ -72,16 +72,14 @@ describe('TeamCityFormatter', function() {
                         }
                     ]
                 });
-                this.eventBroadcaster.emit('test-case-started', {
-                    sourceLocation: this.testCase.sourceLocation
-                });
+                this.eventBroadcaster.emit('test-case-started', this.testCase);
                 this.eventBroadcaster.emit('test-step-finished', {
                     index: 0,
                     testCase: this.testCase,
                     result: { duration: 1, status: Status.PASSED }
                 });
                 this.eventBroadcaster.emit('test-case-finished', {
-                    sourceLocation: this.testCase.sourceLocation,
+                    ...this.testCase,
                     result: { duration: 1, status: Status.PASSED }
                 });
                 this.eventBroadcaster.emit('test-run-finished');
@@ -110,16 +108,14 @@ describe('TeamCityFormatter', function() {
                             }
                         ]
                     });
-                    this.eventBroadcaster.emit('test-case-started', {
-                        sourceLocation: this.testCase.sourceLocation
-                    });
+                    this.eventBroadcaster.emit('test-case-started', this.testCase);
                     this.eventBroadcaster.emit('test-step-finished', {
                         index: 0,
                         testCase: this.testCase,
                         result: { duration: 13, exception: 'my error', status: status }
                     });
                     this.eventBroadcaster.emit('test-case-finished', {
-                        sourceLocation: this.testCase.sourceLocation,
+                        ...this.testCase,
                         result: { duration: 15, status: status }
                     });
                     this.eventBroadcaster.emit('test-run-finished');
@@ -168,8 +164,8 @@ describe('TeamCityFormatter', function() {
                     });
                 }
             });
-            this.testCase1 = { sourceLocation: { uri: 'a.feature', line: 4 } };
-            this.testCase2 = { sourceLocation: { uri: 'a.feature', line: 8 } };
+            this.testCase1 = { attemptNumber: 1, sourceLocation: { uri: 'a.feature', line: 4 } };
+            this.testCase2 = { attemptNumber: 1, sourceLocation: { uri: 'a.feature', line: 8 } };
         });
 
         describe('passed', function() {
@@ -185,9 +181,7 @@ describe('TeamCityFormatter', function() {
                         }
                     ]
                 });
-                this.eventBroadcaster.emit('test-case-started', {
-                    sourceLocation: this.testCase1.sourceLocation
-                });
+                this.eventBroadcaster.emit('test-case-started', this.testCase1);
                 this.eventBroadcaster.emit('test-step-finished', {
                     index: 0,
                     testCase: this.testCase1,
@@ -199,12 +193,12 @@ describe('TeamCityFormatter', function() {
                     result: { duration: 2, status: Status.PASSED }
                 });
                 this.eventBroadcaster.emit('test-case-finished', {
-                    sourceLocation: this.testCase1.sourceLocation,
+                    ...this.testCase1,
                     result: { duration: 3, status: Status.PASSED }
                 });
 
                 this.eventBroadcaster.emit('test-case-prepared', {
-                    sourceLocation: this.testCase2.sourceLocation,
+                    ...this.testCase2,
                     steps: [
                         {
                             sourceLocation: { uri: 'a.feature', line: 10 }
@@ -214,9 +208,7 @@ describe('TeamCityFormatter', function() {
                         }
                     ]
                 });
-                this.eventBroadcaster.emit('test-case-started', {
-                    sourceLocation: this.testCase2.sourceLocation
-                });
+                this.eventBroadcaster.emit('test-case-started', this.testCase2);
                 this.eventBroadcaster.emit('test-step-finished', {
                     index: 0,
                     testCase: this.testCase2,
@@ -228,7 +220,7 @@ describe('TeamCityFormatter', function() {
                     result: { duration: 5, status: Status.PASSED }
                 });
                 this.eventBroadcaster.emit('test-case-finished', {
-                    sourceLocation: this.testCase2.sourceLocation,
+                    ...this.testCase2,
                     result: { duration: 9, status: Status.PASSED }
                 });
 
@@ -263,9 +255,7 @@ describe('TeamCityFormatter', function() {
                         }
                     ]
                 });
-                this.eventBroadcaster.emit('test-case-started', {
-                    sourceLocation: this.testCase1.sourceLocation
-                });
+                this.eventBroadcaster.emit('test-case-started', this.testCase1);
                 this.eventBroadcaster.emit('test-step-finished', {
                     index: 0,
                     testCase: this.testCase1,
@@ -277,7 +267,7 @@ describe('TeamCityFormatter', function() {
                     result: { duration: 2, status: Status.SKIPPED }
                 });
                 this.eventBroadcaster.emit('test-case-finished', {
-                    sourceLocation: this.testCase1.sourceLocation,
+                    ...this.testCase1,
                     result: { duration: 3, status: Status.SKIPPED }
                 });
 
@@ -292,9 +282,7 @@ describe('TeamCityFormatter', function() {
                         }
                     ]
                 });
-                this.eventBroadcaster.emit('test-case-started', {
-                    sourceLocation: this.testCase2.sourceLocation
-                });
+                this.eventBroadcaster.emit('test-case-started', this.testCase2);
                 this.eventBroadcaster.emit('test-step-finished', {
                     index: 0,
                     testCase: this.testCase2,
@@ -306,7 +294,7 @@ describe('TeamCityFormatter', function() {
                     result: { duration: 5, status: Status.SKIPPED }
                 });
                 this.eventBroadcaster.emit('test-case-finished', {
-                    sourceLocation: this.testCase2.sourceLocation,
+                    ...this.testCase2,
                     result: { duration: 9, status: Status.SKIPPED }
                 });
 
@@ -342,9 +330,7 @@ describe('TeamCityFormatter', function() {
                             }
                         ]
                     });
-                    this.eventBroadcaster.emit('test-case-started', {
-                        sourceLocation: this.testCase1.sourceLocation
-                    });
+                    this.eventBroadcaster.emit('test-case-started', this.testCase1);
                     this.eventBroadcaster.emit('test-step-finished', {
                         index: 0,
                         testCase: this.testCase1,
@@ -356,7 +342,7 @@ describe('TeamCityFormatter', function() {
                         result: { duration: 2, status: Status.PASSED }
                     });
                     this.eventBroadcaster.emit('test-case-finished', {
-                        sourceLocation: this.testCase1.sourceLocation,
+                        ...this.testCase1,
                         result: { duration: 3, status: Status.PASSED }
                     });
 
@@ -371,9 +357,7 @@ describe('TeamCityFormatter', function() {
                             }
                         ]
                     });
-                    this.eventBroadcaster.emit('test-case-started', {
-                        sourceLocation: this.testCase2.sourceLocation
-                    });
+                    this.eventBroadcaster.emit('test-case-started', this.testCase2);
                     this.eventBroadcaster.emit('test-step-finished', {
                         index: 0,
                         testCase: this.testCase2,
@@ -385,7 +369,7 @@ describe('TeamCityFormatter', function() {
                         result: { duration: 5, status: Status.PASSED }
                     });
                     this.eventBroadcaster.emit('test-case-finished', {
-                        sourceLocation: this.testCase2.sourceLocation,
+                        ...this.testCase2,
                         result: { duration: 9, status: status }
                     });
 

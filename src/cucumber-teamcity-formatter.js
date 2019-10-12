@@ -28,8 +28,8 @@ export default class TeamCityFormatter extends Formatter {
         }
     }
 
-    logTestCaseStarted({ sourceLocation }) {
-        const { gherkinDocument, pickle: { name: pickleName } } = this.eventDataCollector.getTestCaseData(sourceLocation);
+    logTestCaseStarted({ attemptNumber, sourceLocation }) {
+        const { gherkinDocument, pickle: { name: pickleName } } = this.eventDataCollector.getTestCaseAttempt({ attemptNumber, sourceLocation });
 
         this.logTestSuiteStartedIfFirstTestCase({ sourceLocation, gherkinDocument });
 
@@ -46,18 +46,18 @@ export default class TeamCityFormatter extends Formatter {
         }
     }
 
-    logTestCaseFinished({ sourceLocation }) {
+    logTestCaseFinished({ attemptNumber, sourceLocation }) {
+        const testCaseAttempt = this.eventDataCollector.getTestCaseAttempt({ attemptNumber, sourceLocation });
         const {
             gherkinDocument,
             pickle,
-            testCase,
-            testCase: { result: { status, duration } }
-        } = this.eventDataCollector.getTestCaseData(sourceLocation);
+            result: { status, duration }
+        } = testCaseAttempt;
 
         switch (status) {
             case Status.AMBIGUOUS:
             case Status.FAILED: {
-                this.logTestFailed(gherkinDocument, pickle, testCase)
+                this.logTestFailed(gherkinDocument, pickle, testCaseAttempt)
                 break;
             }
 
@@ -71,14 +71,14 @@ export default class TeamCityFormatter extends Formatter {
         this.logTestSuiteFinishedIfLastTestCase({ sourceLocation, gherkinDocument });
     }
 
-    logTestFailed(gherkinDocument, pickle, testCase) {
+    logTestFailed(gherkinDocument, pickle, testCaseAttempt) {
         const details = formatterHelpers.formatIssue({
             colorFns: this.colorFns,
             gherkinDocument,
             number: 1,
             pickle,
             snippetBuilder: this.snippetBuilder,
-            testCase
+            testCaseAttempt
         });
 
         this.log(`##teamcity[testFailed name='${this.escape(pickle.name)}' message='${this.escape(`${pickle.name} FAILED`)}' details='${this.escape(details)}']\n`);
