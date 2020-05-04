@@ -6,7 +6,7 @@
 [![Code Climate](https://codeclimate.com/github/bingnz/cucumber-teamcity-formatter/badges/gpa.svg)](https://codeclimate.com/github/bingnz/cucumber-teamcity-formatter)
 [![Test Coverage](https://codeclimate.com/github/bingnz/cucumber-teamcity-formatter/badges/coverage.svg)](https://codeclimate.com/github/bingnz/cucumber-teamcity-formatter)
 [![Dependency Status](https://david-dm.org/bingnz/cucumber-teamcity-formatter.svg)](https://david-dm.org/bingnz/cucumber-teamcity-formatter)
-[![devDependency Status](https://david-dm.org/bingnz/cucumber-teamcity-formatter/dev-status.svg)](https://david-dm.org/bingnz/cucumber-teamcity-formatter#info=devDependencies) [![Greenkeeper badge](https://badges.greenkeeper.io/bingnz/cucumber-teamcity-formatter.svg)](https://greenkeeper.io/)
+[![devDependency Status](https://david-dm.org/bingnz/cucumber-teamcity-formatter/dev-status.svg)](https://david-dm.org/bingnz/cucumber-teamcity-formatter#info=devDependencies) 
 
 ## Install
 
