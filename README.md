@@ -2,7 +2,7 @@
 
 > Formatter for cucumber-js to write test output to the console in a format parsable by TeamCity.
 
-[![Travis build status](http://img.shields.io/travis/bingnz/cucumber-teamcity-formatter.svg?style=flat)](https://app.travis-ci.com/github/bingnz/cucumber-teamcity-formatter)
+[![Build Status](https://app.travis-ci.com/bingnz/cucumber-teamcity-formatter.svg?branch=master)](https://app.travis-ci.com/bingnz/cucumber-teamcity-formatter)
 [![Code Climate](https://codeclimate.com/github/bingnz/cucumber-teamcity-formatter/badges/gpa.svg)](https://codeclimate.com/github/bingnz/cucumber-teamcity-formatter)
 [![Test Coverage](https://codeclimate.com/github/bingnz/cucumber-teamcity-formatter/badges/coverage.svg)](https://codeclimate.com/github/bingnz/cucumber-teamcity-formatter)
 [![Dependency Status](https://david-dm.org/bingnz/cucumber-teamcity-formatter.svg)](https://david-dm.org/bingnz/cucumber-teamcity-formatter)
